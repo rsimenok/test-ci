@@ -28,7 +28,7 @@ jobs:
 
       - name: Update podspec version
         run: |
-          sed -i "s/s.version *= *[\"'][0-9]\+\.[0-9]\+\.[0-9]\+[\"']/s.version = \"${{ steps.version.outputs.version }}\"/g" ${{ env.podspec_file }}
+          sed -i'' -E "s/(s.version[[:space:]]*=[[:space:]]*[\"'])([0-9]+\.[0-9]+\.[0-9]+)([\"'])/\1${{ steps.version.outputs.version }}\3/" ${{ env.podspec_file }}
           echo "Updated podspec to version ${{ steps.version.outputs.version }}"
 
       - name: Commit updated Podspec
