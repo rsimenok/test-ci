@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name             = 'test'
-  s.version = "v0.0.1"
+  s.version = '0.0.1'
   s.summary          = 'Ketch iOS SDK'
   s.swift_versions   = '5.7'
 
   s.description      = <<-DESC
-  The Ketch iOS SDK. See https://developers.ketch.com/docs/ketch-sdk-for-ios-v20 for mof.
+  The Ketch iOS SDK. See https://developers.ketch.com/docs/ketch-sdk-for-ios-v20 for more if.
                        DESC
 
   s.homepage         = 'https://github.com/ketch-com/ketch-ios'
@@ -18,3 +18,4 @@ Pod::Spec.new do |s|
   s.source_files = 'Sources/KetchSDK/**/*.{h,m,swift,html}'
   s.resources = 'Sources/KetchSDK/**/*.html'
 
+end
