@@ -3,7 +3,7 @@ name: Update Podspec and Create Tag
 on:
   push:
     branches:
-      - master  # Виконувати лише для комітів у master
+      - main  # Виконувати лише для комітів у master
 
 jobs:
   release:
