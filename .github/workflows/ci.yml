@@ -10,7 +10,7 @@ jobs:
     permissions:
       contents: write
 
-    steps:
+  steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -19,30 +19,28 @@ jobs:
       - name: Generate next version
         id: version
         uses: conventional-actions/next-version@v1
-
-      - name: Remove 'v' prefix from version
-        run: echo "CLEAN_VERSION=${VERSION#v}" >> $GITHUB_ENV
-        env:
-          VERSION: ${{ steps.version.outputs.version }}
+        with:
+          prefix: ""
+          tag-prefix: ""
 
       - name: Update podspec version
         run: |
-          sed -i'' -E "s/(s.version[[:space:]]*=[[:space:]]*[\"'])([0-9]+\.[0-9]+\.[0-9]+)([\"'])/\1${{ env.CLEAN_VERSION }}\3/" *.podspec
-          echo "Updated podspec to version ${{ env.CLEAN_VERSION }}"
+          sed -i'' -E "s/(s.version[[:space:]]*=[[:space:]]*[\"'])([0-9]+\.[0-9]+\.[0-9]+)([\"'])/\1${{ steps.version.outputs.version }}\3/" *.podspec
+          echo "Updated podspec to version ${{ steps.version.outputs.version }}"
 
       - name: Commit updated podspec
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add *.podspec
-          git commit -m "Bump version to ${{ env.CLEAN_VERSION }}"
+          git commit -m "Bump version to ${{ steps.version.outputs.version }}"
           git push origin main
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.CLEAN_VERSION }}
-          name: Release ${{ env.CLEAN_VERSION }}
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
           body: "### Changes in this release:\n- Auto-generated release"
           draft: false
           prerelease: false
