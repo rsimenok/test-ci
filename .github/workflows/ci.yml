@@ -20,8 +20,8 @@ jobs:
         id: version
         uses: conventional-actions/next-version@v1
         with:
-          prefix: ""
-          tag-prefix: ""
+          prefix: ''
+          tag-prefix: ''
 
       - name: Update podspec version
         run: |
