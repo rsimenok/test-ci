@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.swift_versions   = '5.7'
 
   s.description      = <<-DESC
-  The Ketch iOS SDK. See https://developers.ketch.com/docs/ketch-sdk-for-ios-v20 for more inf.
+  The Ketch iOS SDK. See https://developers.ketch.com/docs/ketch-sdk-for-ios-v20 for more if.
                        DESC
 
   s.homepage         = 'https://github.com/ketch-com/ketch-ios'
