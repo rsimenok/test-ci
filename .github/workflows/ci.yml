@@ -21,9 +21,12 @@ jobs:
       - name: Generate next version
         id: version
         uses: conventional-actions/next-version@v1
-
+        
       - name: Remove 'v' prefix from version
-        run: echo "clean_version=${{ steps.version.outputs.version }}" | sed 's/^v//' >> $GITHUB_ENV
+        run: |
+          echo "CLEAN_VERSION=${VERSION#v}" >> $GITHUB_ENV
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
 
       - name: Get podspec file
         id: podspec
